@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :quotes
   root 'quote#home'
   get 'dashboard/index'
   
