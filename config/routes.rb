@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   root 'quote#home'
   get 'dashboard/index'
   
-  get 'client' => 'dashboard#client'
-  get 'dealer' => 'dashboard#dealer'
-  get 'admin' => 'dashboard#admin'
+  get 'user' => 'user#index'
+  get 'dealer' => 'dealer#index'
+  get 'admin' => 'admin#index'
   
   devise_for :dealers
   devise_for :admins
