@@ -24,12 +24,26 @@ class QuotesController < ApplicationController
   # POST /quotes
   # POST /quotes.json
   def create
+  
     @user = current_user
     @quote = @user.quotes.build(quote_params)
+    @quote.status = "open"
+    
+    # Getting QuoteItems
+    @quote_item = @quote.quote_items.build(category: "sanitary" , quote_details: "item:tiles,brand:johnson")
+    
+    
+   
+    
+     # for adding quotebids for user
+    @quote_bid = @quote_item.quote_bids.build
+    
+    @quote_bid.dealer_id= 5
+    
     
 
     respond_to do |format|
-      if @quote.save
+      if @quote.save && @quote_item.save && @quote_bid.save
         format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
         format.json { render :show, status: :created, location: @quote }
       else

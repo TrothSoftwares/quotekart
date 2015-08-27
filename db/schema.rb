@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826173326) do
+ActiveRecord::Schema.define(version: 20150827113950) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                                      null: false
@@ -50,21 +50,22 @@ ActiveRecord::Schema.define(version: 20150826173326) do
   add_index "dealers", ["reset_password_token"], name: "index_dealers_on_reset_password_token", unique: true, using: :btree
 
   create_table "quote_bids", force: :cascade do |t|
-    t.integer  "quote_id",      limit: 4
     t.integer  "quote_item_id", limit: 4
     t.integer  "dealer_id",     limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "bid_amount",    limit: 4
   end
 
   add_index "quote_bids", ["dealer_id"], name: "index_quote_bids_on_dealer_id", using: :btree
-  add_index "quote_bids", ["quote_id"], name: "index_quote_bids_on_quote_id", using: :btree
   add_index "quote_bids", ["quote_item_id"], name: "index_quote_bids_on_quote_item_id", using: :btree
 
   create_table "quote_items", force: :cascade do |t|
-    t.integer  "quote_id",   limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "quote_id",      limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "category",      limit: 255
+    t.string   "quote_details", limit: 255
   end
 
   add_index "quote_items", ["quote_id"], name: "index_quote_items_on_quote_id", using: :btree
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150826173326) do
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "status",     limit: 255
   end
 
   create_table "users", force: :cascade do |t|

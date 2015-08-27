@@ -4,5 +4,5 @@ class Dealer < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-         has_many :quote_bids
+         has_many :quote_bids , :class_name => "QuoteBid", :foreign_key => "dealer_id"
 end
