@@ -29,3 +29,15 @@
   margin-bottom: 15px;
   padding: 7px 9px;
 }
+
+/* FOR BOOSTRAP  DYNAMIC FORM */
+
+.entry:not(:first-of-type)
+{
+    margin-top: 10px;
+}
+
+.glyphicon
+{
+    font-size: 12px;
+}

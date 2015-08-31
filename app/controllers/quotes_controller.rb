@@ -10,6 +10,7 @@ class QuotesController < ApplicationController
   # GET /quotes/1
   # GET /quotes/1.json
   def show
+  
   end
 
   # GET /quotes/new
@@ -25,25 +26,48 @@ class QuotesController < ApplicationController
   # POST /quotes.json
   def create
   
+  
+  
+  
     @user = current_user
     @quote = @user.quotes.build(quote_params)
     @quote.status = "open"
     
     # Getting QuoteItems
-    @quote_item = @quote.quote_items.build(category: "sanitary" , quote_details: "item:tiles,brand:johnson")
+    
+    #Quote Details 
+    
+    quote_details_form = params["quote"]["details"]
+    
+    quote_details_form.each do |item,value|
+    logger.info ####### category #####
+    
+    logger.info value
+    #logger.info value["category"]
+    
+    item_category = value["category"]
+    
+    logger.info ####### name #####
+    #logger.info item[:name]
+    
+    @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
+    #@quote_item.save 
+    end
     
     
-   
     
+    
+    
+    ###############   ADMIN VIEW   ######################
      # for adding quotebids for user
-    @quote_bid = @quote_item.quote_bids.build
+    #@quote_bid = @quote_item.quote_bids.build
     
-    @quote_bid.dealer_id= 5
+    #@quote_bid.dealer_id= 5
     
     
 
     respond_to do |format|
-      if @quote.save && @quote_item.save && @quote_bid.save
+      if @quote.save #&& @quote_bid.save
         format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
         format.json { render :show, status: :created, location: @quote }
       else
@@ -86,6 +110,6 @@ class QuotesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def quote_params
      @user = current_user
-      params.require(:quote).permit(:name)
+      params.require(:quote).permit(:name , :details=>[])
     end
 end

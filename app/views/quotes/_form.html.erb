@@ -14,7 +14,31 @@
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
+    <%= @quote.quote_items.first.quote_details.each do |key , value| %>
+     <span> <%= value %></span>
+      
+     
+    <% end %>
   </div>
+  
+    <div class="controls"> 
+      <div class="entry input-group  " >
+      					<input class="form-control" name="quote[details][1][category]" type="text" placeholder="Category" />	
+                        <input class="form-control" name="quote[details][1][name]" type="text" placeholder="Item Name" />
+                        <input class="form-control" name="quote[details][1][brand]" type="text" placeholder="Brand" />
+                        <input class="form-control" name="quote[details][1][size]" type="text" placeholder="Size" />
+                        <input class="form-control" name="quote[details][1][quantity]" type="text" placeholder="Quantity" />
+                        <input class="form-control" name="quote[details][1][remarks]" type="text" placeholder="Remarks" />
+                        
+                    	<span class="input-group-btn">
+                            <button class="btn btn-success btn-add" type="button">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
+                    </div>
+           </div>         
+                    
+  
   <div class="actions">
     <%= f.submit %>
   </div>
