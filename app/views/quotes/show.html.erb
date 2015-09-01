@@ -1,9 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @quote.name %>
-</p>
-
-<%= link_to 'Edit', edit_quote_path(@quote) %> |
-<%= link_to 'Back', quotes_path %>
+	<% if current_user.present? %> 
+    <%= render 'quotes/user_quotes_view' %>
+     <% end %>
+     
+     <% if current_dealer.present? %> 
+    <%= render 'quotes/dealer_quotes_view' %>
+     <% end %>
+     
+     <% if current_admin.present? %> 
+    <%= render 'quotes/admin_quotes_view' %>
+     <% end %>

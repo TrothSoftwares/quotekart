@@ -20,6 +20,8 @@ class QuotesController < ApplicationController
 
   # GET /quotes/1/edit
   def edit
+  
+  @dealers = Dealer.all
   end
 
   # POST /quotes

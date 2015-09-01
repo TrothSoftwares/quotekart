@@ -1,6 +1,14 @@
 <h1>Editing Quote</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @quote %> |
-<%= link_to 'Back', quotes_path %>
+	<% if current_user.present? %> 
+    <%= render 'form_user' %>
+     <% end %>
+     
+     <% if current_dealer.present? %> 
+    <%= render 'form_dealer' %>
+     <% end %>
+     
+     <% if current_admin.present? %> 
+    <%= render 'form_admin' %>
+     <% end %>
+     
+ 
