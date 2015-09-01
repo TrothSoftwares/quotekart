@@ -26,48 +26,17 @@ class QuotesController < ApplicationController
   # POST /quotes.json
   def create
   
-  
-  
-  
     @user = current_user
     @quote = @user.quotes.build(quote_params)
-    @quote.status = "open"
-    
-    # Getting QuoteItems
-    
-    #Quote Details 
-    
+    @quote.status = "created"
     quote_details_form = params["quote"]["details"]
-    
     quote_details_form.each do |item,value|
-    logger.info ####### category #####
-    
-    logger.info value
-    #logger.info value["category"]
-    
-    item_category = value["category"]
-    
-    logger.info ####### name #####
-    #logger.info item[:name]
-    
-    @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
-    #@quote_item.save 
+      item_category = value["category"]
+      @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
     end
-    
-    
-    
-    
-    
-    ###############   ADMIN VIEW   ######################
-     # for adding quotebids for user
-    #@quote_bid = @quote_item.quote_bids.build
-    
-    #@quote_bid.dealer_id= 5
-    
-    
 
     respond_to do |format|
-      if @quote.save #&& @quote_bid.save
+      if @quote.save  
         format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
         format.json { render :show, status: :created, location: @quote }
       else
@@ -77,9 +46,35 @@ class QuotesController < ApplicationController
     end
   end
 
+
+
   # PATCH/PUT /quotes/1
   # PATCH/PUT /quotes/1.json
   def update
+  
+  
+    ###### CLIENT UPDATE #########
+    @user = current_user
+    @quote = @user.quotes.find(params[:id])
+    quote_details_form = params["quote"]["details"]
+    @quote.quote_items.destroy_all
+    quote_details_form.each do |item,value|
+      item_category = value["category"]
+      @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
+    end
+    ###### -------------- #########
+    
+    
+    
+    ########   ADMIN UPDATE   #####
+     # for adding quotebids for user
+    #@quote_bid = @quote_item.quote_bids.build
+    
+    #@quote_bid.dealer_id= 5
+    
+    #####-------------------########
+
+    
     respond_to do |format|
       if @quote.update(quote_params)
         format.html { redirect_to @quote, notice: 'Quote was successfully updated.' }

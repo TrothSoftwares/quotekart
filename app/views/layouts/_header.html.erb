@@ -14,7 +14,24 @@
    
     <div class="  navbar-collapse yesb" id="bs-example-navbar-collapse-1">
     
+     
+     
+    
+    <% if current_user.present? %> 
     <%= render 'layouts/header_users' %>
+     <% end %>
+     
+     <% if current_dealer.present? %> 
+    <%= render 'layouts/header_dealers' %>
+     <% end %>
+     
+     <% if current_admin.present? %> 
+    <%= render 'layouts/header_admin' %>
+     <% end %>
+     
+     
+      
+    
     
     
 

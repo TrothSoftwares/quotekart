@@ -9,9 +9,16 @@ jQuery(function()
 
         var controlForm = jQuery('.controls'),
             currentEntry = jQuery(this).parents('.entry:first'),
-            newEntry = jQuery(currentEntry.clone()).appendTo(controlForm);
-        
-        console.log(controlForm)
+            newEntry = jQuery(currentEntry.clone()
+            		.find(':input')
+            	      .each(function(){
+            	            this.name = this.name.replace(/\[(\d+)\]/, function(str,p1){
+            	                return '[' + (parseInt(p1,10)+1) + ']';
+            	            });
+            	        })
+            	    .end()
+            	    .appendTo(controlForm));
+            		
 
         newEntry.find('input').val('');
         controlForm.find('.entry:not(:last) .btn-add')
