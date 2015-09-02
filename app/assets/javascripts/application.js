@@ -18,36 +18,3 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-multiselect
-
-    $(document).ready(function() {
-    $('#quotes_table').DataTable({
-    		"pageLength": 10, 
-    		
-    });
-    
-    
-    
-   $('#sent_quotes').multiselect({
-        enableFiltering: true,
-        enableClickableOptGroups: true, 
-        //includeSelectAllOption: true
-   });
-   
-   $('.multiselect-group').before('<input type="checkbox" />');
-   $(document).on('click', '.multiselect-group', function(event) {
-       var checkAll = true;
-       var $opts = $(this).parent().nextUntil(':has(.multiselect-group)'); 
-       var $inactive = $opts.filter(':not(.active)'); 
-       var $toggleMe = $inactive;
-       if ($inactive.length == 0) { 
-           $toggleMe = $opts;
-           checkAll = false;
-       }
-       $toggleMe.find('input').click();
-       $(this).parent().find('input').attr('checked', checkAll);
-       event.preventDefault();
-   });
-     
-    
-    
-} );

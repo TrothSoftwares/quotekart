@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'dealer' => 'dealer#index'
   get 'admin' => 'admin#index'
   
-  devise_for :dealers
+  devise_for :dealers , controllers: { registrations: "dealers/registrations" }
   devise_for :admins
   devise_for :users
    

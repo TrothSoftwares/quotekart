@@ -5,4 +5,5 @@ class Dealer < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
          has_many :quote_bids , :class_name => "QuoteBid", :foreign_key => "dealer_id"
+         serialize :shop_type, Array
 end
