@@ -1,11 +1,15 @@
 class Quote < ActiveRecord::Base
-validates :status, inclusion: { in: %w(open clientsubmited adminsent dealerdrafted dealersubmited released) }
+#validates :status, inclusion: { in: %w(created open clientsubmited adminsent dealerdrafted dealersubmited released) }
 
-attr_accessor :status
+
+ 
 
   has_many :quote_items
-  has_many :quote_bids
+  has_many :quote_bids , through: :quote_items
   belongs_to :user
+  
+  
+  accepts_nested_attributes_for :quote_bids
   
   
     

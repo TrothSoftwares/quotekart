@@ -1,0 +1,19 @@
+<div>
+
+
+<label> Quote name</label>
+<label><%= @quote.name %></label>
+<div class="table-responsive">
+<table class="table table-striped">
+  <% @quote.quote_items.each_with_index do |quote_item, index| %>
+  <tr><td><%= index +1 %></td>
+  <%  quote_item.quote_details.each do |label, data|%>
+  
+  <td><b><%= label.upcase %></b></td><td><%= data %></td>
+  <% end %>
+  </tr>
+  <% end %>
+</table> 
+</div>
+  <%= link_to  "Apply for this quote",  edit_quote_path %>
+</div>

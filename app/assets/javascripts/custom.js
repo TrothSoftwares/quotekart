@@ -1,7 +1,10 @@
 
-/* FOR QUOTE FORM */
+
 jQuery(function()
 {
+	
+	
+	/* FOR QUOTE FORM */
     jQuery(document).on('click', '.btn-add', function(e)
     		
     {
@@ -32,9 +35,21 @@ jQuery(function()
 		e.preventDefault();
 		return false;
 	});
+    /* END OF QUOTE FORM */
+    
+    
+	/* FOR MULTISELECT IN ADMIN SENT TO DEALERS  */
+	$('#sent_quotes').multiselect({
+	    enableFiltering: true,
+	    //includeSelectAllOption: true
+	});
+	/*---------  END OF TABLE LISTING QUOTES -----------*/
+	
+	
+	
 });
 
-/* END OF QUOTE FORM */
+
 
 
 
@@ -42,8 +57,10 @@ jQuery(function()
 $(document).ready(function() {
 	
 	
+
 	
-	/**** FOR TABLE LISTING QUOTE (DATATABLES) */
+	
+	/* FOR TABLE LISTING QUOTE (DATATABLES) */
 $('#quotes_table').DataTable({
 		"pageLength": 10, 
 		
@@ -52,29 +69,6 @@ $('#quotes_table').DataTable({
 
 
 
-/**** FOR MULTISELECT IN ADMIN SENT TO DEALERS  */
-$('#sent_quotes').multiselect({
-    enableFiltering: true,
-    enableClickableOptGroups: true, 
-    //includeSelectAllOption: true
-});
 
-$('.multiselect-group').before('<input type="checkbox" />');
-$(document).on('click', '.multiselect-group', function(event) {
-   var checkAll = true;
-   var $opts = $(this).parent().nextUntil(':has(.multiselect-group)'); 
-   var $inactive = $opts.filter(':not(.active)'); 
-   var $toggleMe = $inactive;
-   if ($inactive.length == 0) { 
-       $toggleMe = $opts;
-       checkAll = false;
-   }
-   $toggleMe.find('input').click();
-   $(this).parent().find('input').attr('checked', checkAll);
-   event.preventDefault();
-});
-
-
-/*---------  END OF TABLE LISTING QUOTES -----------*/
 
 } );

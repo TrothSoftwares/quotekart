@@ -1,0 +1,50 @@
+
+<%= form_for(@quote) do |f| %>
+<% if @quote.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
+	<ul>
+		<% @quote.errors.full_messages.each do |message| %>
+		<li>
+			<%= message %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+	<%= f.hidden_field :name %>
+	
+	<input type="hidden" name="dealer_update" value="true">
+	
+<div>
+	<label> Quote name</label>
+	<label><%= @quote.name %></label>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<% @quote.quote_items.each_with_index do |quote_item, index| %>
+			<tr>
+					<td><%= index +1 %></td>
+					<%  quote_item.quote_details.each do |label, data|%>
+					<td><b><%= label.upcase %></b></td><td><%= data %></td>
+					<% end %>
+
+			 			
+				    <% @quote.quote_bids.each do |quote_bid| %>
+						<%= f.fields_for quote_bid , index: quote_bid.id do |quote_bid_form| %>
+							<td><b><%= quote_bid_form.number_field :bid_amount%></b></td>
+						<% end %>
+				
+					<% end %>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+	<%= link_to  "Apply for this quote",  edit_quote_path %>
+</div>
+
+
+<div class="actions">
+	<%= f.submit %>
+</div>
+<% end %>

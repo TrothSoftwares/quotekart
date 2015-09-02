@@ -6,4 +6,6 @@ class Dealer < ActiveRecord::Base
          
          has_many :quote_bids , :class_name => "QuoteBid", :foreign_key => "dealer_id"
          serialize :shop_type, Array
+         validates :shop_type, presence: true
+         
 end
