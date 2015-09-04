@@ -19,61 +19,61 @@
 
 </div>
 
-	<% if ! @quote.persisted? %>
+<% if !@quote.persisted? %>
 
-	<!-- if new record -->
-	<div class="controls">
-		<div class="entry input-group  " >
-			<input class="form-control" name="quote[details][1][category]" type="text" placeholder="Category" />
-			<input class="form-control" name="quote[details][1][name]" type="text" placeholder="Item Name" />
-			<input class="form-control" name="quote[details][1][brand]" type="text" placeholder="Brand" />
-			<input class="form-control" name="quote[details][1][size]" type="text" placeholder="Size" />
-			<input class="form-control" name="quote[details][1][quantity]" type="text" placeholder="Quantity" />
-			<input class="form-control" name="quote[details][1][remarks]" type="text" placeholder="Remarks" />
+<!-- if new record -->
+<div class="controls">
+	<div class="entry input-group  " >
+		<input class="form-control" name="quote[details][1][category]" type="text" placeholder="Category" />
+		<input class="form-control" name="quote[details][1][name]" type="text" placeholder="Item Name" />
+		<input class="form-control" name="quote[details][1][brand]" type="text" placeholder="Brand" />
+		<input class="form-control" name="quote[details][1][size]" type="text" placeholder="Size" />
+		<input class="form-control" name="quote[details][1][quantity]" type="text" placeholder="Quantity" />
+		<input class="form-control" name="quote[details][1][remarks]" type="text" placeholder="Remarks" />
 
-			<span class="input-group-btn">
-				<button class="btn btn-success btn-add" type="button">
-					<span class="glyphicon glyphicon-plus"></span>
-				</button> </span>
-		</div>
+		<span class="input-group-btn">
+			<button class="btn btn-success btn-add" type="button">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button> </span>
 	</div>
+</div>
 
-	<%  else %>
-	<div class="controls">
-		<%   @quote.quote_items.each_with_index do |quote_item_details , index|  %>
+<%  else %>
+<div class="controls">
+	<%   @quote.quote_items.each_with_index do |quote_item_details , index|  %>
 
-		<div class="entry input-group  " >
-			<% quote_item_details.quote_details.each do | item_key ,value |  %>
+	<div class="entry input-group  " >
+		<% quote_item_details.quote_details.each do | item_key ,value |  %>
 
-			<input class="form-control" name="quote[details][<%= index %>][<%= item_key %>]"  value = "<%= value %>"type="text" placeholder="<%= item_key.upcase %>" />
-			<% end   %>
+		<input class="form-control" name="quote[details][<%= index %>][<%= item_key %>]"  value = "<%= value %>"type="text" placeholder="<%= item_key.upcase %>" />
+		<% end   %>
 
-			<%
+		<%
  if index == @quote.quote_items.size - 1
-          button = "btn-add"
-          glyphicon = "glyphicon-plus"
-          button_class = "btn-success"
-        else
-          button = "btn-remove"
-          glyphicon = "glyphicon-minus"
-          button_class = "btn-danger"
-        end
+        button = "btn-add"
+        glyphicon = "glyphicon-plus"
+        button_class = "btn-success"
+      else
+        button = "btn-remove"
+        glyphicon = "glyphicon-minus"
+        button_class = "btn-danger"
+      end
 %>
 
-			<span class="input-group-btn">
-				<button class="btn  <%= button_class  %> <%= button  %>" type="button">
-					<span class="glyphicon <%= glyphicon %>"></span>
-				</button> </span>
-		</div>
-
-		<% end %>
+		<span class="input-group-btn">
+			<button class="btn  <%= button_class  %> <%= button  %>" type="button">
+				<span class="glyphicon <%= glyphicon %>"></span>
+			</button> </span>
 	</div>
+
+	<% end %>
+</div>
+
+<% end %>
 <div class="actions">
 	<%= f.submit %>
 </div>
-	<% end %>
 
 </div>
-
 
 <% end %>

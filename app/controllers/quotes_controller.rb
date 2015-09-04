@@ -71,6 +71,8 @@ class QuotesController < ApplicationController
     
     
      
+     
+     
     ########   ADMIN UPDATE   #####
     if params[:admin_update]
       @quote.update_attribute(:status,  'admin_sent')
