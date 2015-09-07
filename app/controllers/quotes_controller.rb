@@ -26,6 +26,23 @@ class QuotesController < ApplicationController
 
   # POST /quotes
   # POST /quotes.json
+  
+ def sent_quote
+       @quote.update_attribute(:status,  'admin_sent')
+      item_category = params[:quote_category]
+      sent_to_dealers = Dealer.all.select { |m| m.shop_type.include? item_category  }
+      if sent_to_dealers.present?
+       sent_to_dealers.each do|sent_to_dealer| 
+         @quote_items= @quote.quote_items
+          @quote_items.each do |qitem|
+            @quote_bid = qitem.quote_bids.create(dealer_id: sent_to_dealer.id)
+          end
+      end
+      end 
+ end
+  
+  
+  
   def create
   
     @user = current_user
@@ -37,6 +54,12 @@ class QuotesController < ApplicationController
       @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
     end
 
+
+  if params[:client_sent]
+      sent_quote   
+    end
+    
+    
     respond_to do |format|
       if @quote.save  
         format.html { redirect_to @quote, notice: 'Quote was successfully created.' }

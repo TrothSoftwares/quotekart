@@ -19,7 +19,14 @@
 
 </div>
 
+
+<% quote_category = params[:category] %>
+<input type="hidden" name="quote_category" value="<%= quote_category %>" >
+<input type="hidden" name="client_sent" value="yes" >
 <% if !@quote.persisted? %>
+
+
+
 
 <!-- if new record -->
 <div class="controls">
