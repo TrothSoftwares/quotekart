@@ -47,7 +47,7 @@ class QuotesController < ApplicationController
   
     @user = current_user
     @quote = @user.quotes.build(quote_params)
-    @quote.status = "client_submitted"
+    @quote.status = "created"
     quote_details_form = params["quote"]["details"]
     quote_details_form.each do |item,value|
       item_category = value["category"]
@@ -55,7 +55,7 @@ class QuotesController < ApplicationController
     end
 
 
-    if params[:client_sent]
+    if params[:commit] == "Submit"
       sent_quote   
     end
     
@@ -80,8 +80,8 @@ class QuotesController < ApplicationController
     @dealers = Dealer.all
     
     ###### CLIENT UPDATE #########
-    if params[:client_update].present?
-    logger.info "#########s"
+    if params[:update_type] == "client_update"
+     logger.info "#########"
       @user = current_user
       @quote = @user.quotes.find(params[:id])
       quote_details_form = params["quote"]["details"]
@@ -90,6 +90,11 @@ class QuotesController < ApplicationController
         item_category = value["category"]
         @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
       end
+      
+    if params[:commit] == "Submit"
+    logger.info "#########submit"
+      sent_quote   
+    end
     end 
     ###### -------------- #########
     

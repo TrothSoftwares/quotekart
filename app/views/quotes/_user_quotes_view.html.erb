@@ -1,0 +1,36 @@
+<div class="row">
+	<h3><%= @quote.name %></h3>
+ </div>
+
+
+
+
+<ol class="progtrckr" data-progtrckr-steps="5">
+<% stage = process_stage %>
+    <li class="progtrckr-<%= stage[0] %>">Created</li>
+    <li class="progtrckr-<%= stage[1] %>">Submitted</li>
+    <li class="progtrckr-<%= stage[2] %>">Recieving Response</li>
+    <li class="progtrckr-<%= stage[3] %>">Release</li>
+    <li class="progtrckr-<%= stage[4] %>">Delivered</li>
+</ol>
+<br><br>
+<div>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<% @quote.quote_items.each_with_index do |quote_item, index| %>
+			<tr>
+					<td><%= index +1 %></td>
+					<%  quote_item.quote_details.each do |label, data|%>
+					<td><b><%= label.upcase %></b></td><td><%= data %></td>
+					<% end %>
+
+			 			
+				 
+			</tr>
+			<% end %>
+		</table>
+	</div>
+	<%= link_to    edit_quote_path do %>
+	<button class="btn btn-primary" >Release Quote</button>
+	<% end %>
+</div>

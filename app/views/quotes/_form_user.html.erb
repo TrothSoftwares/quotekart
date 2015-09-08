@@ -1,4 +1,4 @@
-<%= form_for(@quote) do |f| %>
+<%= form_for(@quote , :html => {:class => "form-inline"}) do |f| %>
 <% if @quote.errors.any? %>
 <div id="error_explanation">
 	<h2><%= pluralize(@quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
@@ -12,34 +12,58 @@
 </div>
 <% end %>
 
-<div class="field">
-	<%= f.label :name %>
-	<br>
-	<%= f.text_field :name %>
+<div class="row ">
+	<div class="form-group col-md-4">
+		<h1 style="margin-top:0px"> Add New Quote</h1>
+		<br>
+	</div>
+	<div class="form-group col-md-8">
+		<%= f.label :name , "Quote Title" %>
+		<%= f.text_field :name , class:"form-control"%>
+	</div>
 </div>
 
-
-<% quote_category = params[:category] %>
+<% quote_category = params[:category] 
+if current_user.present?
+update_type = "client_update"
+elsif current_dealer.present?
+update_type = "dealer_update"
+elsif current_admin.present?
+update_type = "admin_update"
+end
+%>
 <input type="hidden" name="quote_category" value="<%= quote_category %>" >
-<input type="hidden" name="client_sent" value="yes" >
+<input type="hidden" name="update_type" value="<%= update_type %>" >
 <% if !@quote.persisted? %>
 
 <!-- if new record -->
 <div class="controls">
 	<div class="entry input-group  " >
-		<input class="form-control" name="quote[details][1][category]" type="text" placeholder="Category" />
-		<input class="form-control" name="quote[details][1][name]" type="text" placeholder="Item Name" />
-		<input class="form-control" name="quote[details][1][brand]" type="text" placeholder="Brand" />
-		<input class="form-control" name="quote[details][1][size]" type="text" placeholder="Size" />
-		<input class="form-control" name="quote[details][1][quantity]" type="text" placeholder="Quantity" />
-		<input class="form-control" name="quote[details][1][remarks]" type="text" placeholder="Remarks" />
-
+		<div class="form-group">
+			<input class="form-control" name="quote[details][1][category]" type="text" placeholder="Category" />
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="quote[details][1][name]" type="text" placeholder="Item Name" />
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="quote[details][1][brand]" type="text" placeholder="Brand" />
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="quote[details][1][size]" type="text" placeholder="Size" />
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="quote[details][1][quantity]" type="text" placeholder="Quantity" />
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="quote[details][1][remarks]" type="text" placeholder="Remarks" />
+		</div>
 		<span class="input-group-btn">
 			<button class="btn btn-success btn-add" type="button">
 				<span class="glyphicon glyphicon-plus"></span>
-			</button> </span>
+			</button>
 	</div>
 </div>
+ 
 
 <%  else %>
 <div class="controls">
@@ -47,7 +71,7 @@
 
 	<div class="entry input-group  " >
 		<% quote_item_details.quote_details.each do | item_key ,value |  %>
-		<input class="form-control" name="quote[details][<%= index %>][<%= item_key %>]"  value = "<%= value %>"type="text" placeholder="<%= item_key.upcase %>" />
+		<input class="form-control" name="quote[details][<%= index %>][<%= item_key %>]"  value ="<%= value %>" type="text" placeholder="<%= item_key.upcase %>" />
 		<% end   %>
 
 		<%
@@ -72,8 +96,12 @@
 </div>
 
 <% end %>
-<div class="actions">
-	<%= f.submit %>
+<div class="form-group text-center	">
+<br><br>
+		
+	<%= f.submit 'Submit', :class => 'form-control btn btn-primary' %>
+	
+	<%= f.submit 'Save', :class => 'form-control btn btn-primary' %>
 </div>
 
 </div>
