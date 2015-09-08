@@ -23,7 +23,7 @@
 </div>
 <br>
 
-<% quote_category = params[:category] 
+<% quote_category = params[:category] || @quote.quote_items.first.category
 if current_user.present?
 update_type = "client_update"
 elsif current_dealer.present?

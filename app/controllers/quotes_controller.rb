@@ -51,7 +51,7 @@ class QuotesController < ApplicationController
     @quote.status = "created"
     quote_details_form = params["quote"]["details"]
     quote_details_form.each do |item,value|
-      item_category = value["category"]||"default"
+      item_category = params["quote_category"]||"default"
       @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
     end
 
@@ -88,7 +88,7 @@ class QuotesController < ApplicationController
       quote_details_form = params["quote"]["details"]
       @quote.quote_items.destroy_all
       quote_details_form.each do |item,value|
-        item_category = value["category"]||"default"
+        item_category = params["quote_category"]||"default"
         @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
       end
       
