@@ -9,7 +9,7 @@ class Quote < ActiveRecord::Base
   belongs_to :user
   
   
-  accepts_nested_attributes_for :quote_bids
+  accepts_nested_attributes_for :quote_bids 
   
   
     

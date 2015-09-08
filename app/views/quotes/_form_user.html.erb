@@ -16,7 +16,6 @@
 	<%= f.label :name %>
 	<br>
 	<%= f.text_field :name %>
-
 </div>
 
 
@@ -24,9 +23,6 @@
 <input type="hidden" name="quote_category" value="<%= quote_category %>" >
 <input type="hidden" name="client_sent" value="yes" >
 <% if !@quote.persisted? %>
-
-
-
 
 <!-- if new record -->
 <div class="controls">
@@ -51,7 +47,6 @@
 
 	<div class="entry input-group  " >
 		<% quote_item_details.quote_details.each do | item_key ,value |  %>
-
 		<input class="form-control" name="quote[details][<%= index %>][<%= item_key %>]"  value = "<%= value %>"type="text" placeholder="<%= item_key.upcase %>" />
 		<% end   %>
 

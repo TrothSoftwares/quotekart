@@ -55,7 +55,7 @@ class QuotesController < ApplicationController
     end
 
 
-  if params[:client_sent]
+    if params[:client_sent]
       sent_quote   
     end
     
@@ -81,6 +81,7 @@ class QuotesController < ApplicationController
     
     ###### CLIENT UPDATE #########
     if params[:client_update].present?
+    logger.info "#########s"
       @user = current_user
       @quote = @user.quotes.find(params[:id])
       quote_details_form = params["quote"]["details"]
@@ -161,6 +162,6 @@ class QuotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quote_params
-      params.require(:quote).permit(:name , :quote_bids , :quote_bids_attributes=>[:amount,:name] , :details=>[], )
+      params.require(:quote).permit(:name , :quote_bids  ,  :quote_bids_attributes=>[:amount,:name] ,  :details=>[] )
     end
 end

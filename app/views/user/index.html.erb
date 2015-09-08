@@ -9,18 +9,53 @@
         <h4 class="modal-title" id="myModalLabel">Caterories</h4>
       </div>
       <div class="modal-body">
-        <ul>
-        <li><%= link_to "Tiles",  new_quote_path(:category => "tiles") %></li>
-        <li><%= link_to "Granite",  new_quote_path(:category => "granite") %></li>
-        <li><%= link_to "Marble",  new_quote_path(:category => "marble") %></li>
-        <li><%= link_to "Plumbing",  new_quote_path(:category => "plumbing") %></li>
-        <li><%= link_to "Sanitary",  new_quote_path(:category => "sanitary") %></li>
-        <li><%= link_to "Electrical",  new_quote_path(:category => "electrical") %></li>
-        </ul>
+      <div class="row">
+        <div class="col-md-6" >
+        	<%= link_to   new_quote_path(:category => "tiles") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-building fa-2x">	Tiles</i>  
+				</button>
+        	<% end %><br><br>
+        	<%= link_to   new_quote_path(:category => "granite") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-building-o fa-2x">		Granite</i>  
+				</button>
+        	<% end %><br><br>
+        	<%= link_to   new_quote_path(:category => "marble") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-stop fa-2x">	Marble</i>  
+				</button>
+        	<% end %><br><br>
+     
+       
+        	
+        </div>
+        
+        <div class="col-md-6" >
+        	<%= link_to   new_quote_path(:category => "sanitary") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-bars fa-2x">	Sanitary</i>  
+				</button>
+        	<% end %><br><br>
+        	<%= link_to   new_quote_path(:category => "electrical") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-plug fa-2x">	Electrical</i>  
+				</button>
+        	<% end %><br><br>
+         	   		<%= link_to   new_quote_path(:category => "plumbing") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-bitbucket fa-2x">	 Plumbing</i>  
+				</button>
+        	<% end %>
+        
+       
+       
+        </div>
+        </div>
+ 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+     
       </div>
     </div>
   </div>
