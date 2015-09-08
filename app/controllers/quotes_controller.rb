@@ -29,6 +29,7 @@ class QuotesController < ApplicationController
   
  def sent_quote
        @quote.update_attribute(:status,  'admin_sent')
+       @quote.update_attribute(:submitted_at, DateTime.now)
       item_category = params[:quote_category]
       sent_to_dealers = Dealer.all.select { |m| m.shop_type.include? item_category  }
       if sent_to_dealers.present?
@@ -50,7 +51,7 @@ class QuotesController < ApplicationController
     @quote.status = "created"
     quote_details_form = params["quote"]["details"]
     quote_details_form.each do |item,value|
-      item_category = value["category"]
+      item_category = value["category"]||"default"
       @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
     end
 
@@ -87,7 +88,7 @@ class QuotesController < ApplicationController
       quote_details_form = params["quote"]["details"]
       @quote.quote_items.destroy_all
       quote_details_form.each do |item,value|
-        item_category = value["category"]
+        item_category = value["category"]||"default"
         @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
       end
       
@@ -121,6 +122,8 @@ class QuotesController < ApplicationController
         ########   DEALER UPDATE   #####
     if params[:dealer_update]
       @quote.update_attribute(:status,  'dealersubmited')
+      
+      
       
       '''
       sent_to_dealers = params[:sent_to_dealers]
@@ -167,6 +170,6 @@ class QuotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quote_params
-      params.require(:quote).permit(:name , :quote_bids  ,  :quote_bids_attributes=>[:amount,:name] ,  :details=>[] )
+      params.require(:quote).permit(:name , :quote_bid   ,  :quote_bids_attributes=>[:amount,:name, :bid_amount , :id] ,  :details=>[] )
     end
 end

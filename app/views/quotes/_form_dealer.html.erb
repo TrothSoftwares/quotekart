@@ -22,21 +22,23 @@
 	<label><%= @quote.name %></label>
 	<div class="table-responsive">
 		<table class="table table-striped">
+		
+		
+		<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Quantity</th><th>Unit</th><th>Remarks</th>
 			<% @quote.quote_items.each_with_index do |quote_item, index| %>
 			<tr>
 					<td><%= index +1 %></td>
 					<%  quote_item.quote_details.each do |label, data|%>
 					<td><b><%= label.upcase %></b></td><td><%= data %></td>
 					<% end %>
-
+					</tr>
+					<tr>
+					<%= f.fields_for :quote_bids , @quote.quote_bids.where(dealer: current_dealer , quote_item: quote_item) do |quote_bid_fields| %>
+   					   <td><b>Bid Amount: </b><%= quote_bid_fields.number_field :bid_amount %></td>
+ 					 <% end %>
+					
 			 			
-				    <% @quote.quote_bids.each do |quote_bid| %>
-						<%= f.fields_for quote_bid , index: quote_bid.id do |quote_bid_form| %>
-							<td><b><%= quote_bid_form.number_field :bid_amount%></b></td>
-						<% end %>
-				
-					<% end %>
-			</tr>
+ 			</tr>
 			<% end %>
 		</table>
 	</div>

@@ -15,19 +15,23 @@
 </ol>
 <br><br>
 <div>
-	<div class="table-responsive">
-		<table class="table table-striped">
-			<% @quote.quote_items.each_with_index do |quote_item, index| %>
-			<tr>
-					<td><%= index +1 %></td>
+		<div class="table-responsive">
+	
+	<table class="table table-striped    table-condensed">
+	<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Gauge</th><th>Quantity</th><th>Unit</th><th>Remarks</th>
+	
+			<% @quote.quote_items.each do |quote_item| %>
+				<tr>
 					<%  quote_item.quote_details.each do |label, data|%>
-					<td><b><%= label.upcase %></b></td><td><%= data %></td>
+					<td><%= data %></td>
 					<% end %>
-
-			 			
-				 
-			</tr>
+				</tr>
 			<% end %>
+ 	 </table>
+ 	 
+ 		
+ 		
+			
 		</table>
 	</div>
 	<%= link_to    edit_quote_path do %>
