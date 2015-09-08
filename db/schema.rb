@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902004151) do
+ActiveRecord::Schema.define(version: 20150908030653) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                                      null: false
@@ -62,9 +62,12 @@ ActiveRecord::Schema.define(version: 20150902004151) do
   create_table "quote_bids", force: :cascade do |t|
     t.integer  "quote_item_id", limit: 4
     t.integer  "dealer_id",     limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "bid_amount",    limit: 4
+    t.decimal  "unit_amount",                 precision: 10
+    t.text     "status",        limit: 65535
+    t.text     "remarks",       limit: 65535
   end
 
   add_index "quote_bids", ["dealer_id"], name: "index_quote_bids_on_dealer_id", using: :btree

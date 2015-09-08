@@ -70,13 +70,13 @@
                 <th>Title</th>
                 <th>Show</th>
                 <th>Edit</th>
-                <th>Age</th>
+                <th>Delete</th>
                 <th>Updated At</th>
                  
             </tr>
         </thead>
         <tbody>
-        <% open_quotes = Quote.where(status: 'clientdrafted', user_id: current_user.id) %>
+        <% open_quotes = Quote.where(status: 'created', user_id: current_user.id) %>
             <% open_quotes.each do |quote| %>
       <tr>
       	<td><%= quote.id %></td>
