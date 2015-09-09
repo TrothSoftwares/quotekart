@@ -13,7 +13,7 @@
 <div>
 		<div class="table-responsive">
 	
-	<table class="table table-striped   table-hover table-condensed">
+	<table class="table table-striped table-bordered  table-hover table-condensed">
 	<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Gauge</th><th>Quantity</th><th>Unit</th><th>Remarks</th>
 	
 			<% @quote.quote_items.each do |quote_item| %>
@@ -26,7 +26,17 @@
  	 </table>
  
 	</div>
+	
+	<% if @quote.status == 'created' %>
 	<%= link_to    edit_quote_path do %>
+	<button class="btn btn-primary" >Continue Editing</button>
+	<% end %>
+	<% else %>
+	<%= link_to    quotes_path(:type => 'open') do %>
+	<button class="btn btn-primary" >Back</button>
+	<%= link_to    quotes_path(:type => 'open') do %>
 	<button class="btn btn-primary" >Release Quote</button>
 	<% end %>
-</div>
+	<% end %>
+	<% end %>
+	</div>

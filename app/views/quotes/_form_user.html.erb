@@ -150,9 +150,13 @@ end
 <div class="form-group">
 <br><br>
 		
-	<%= f.submit 'Submit', :class => 'form-control btn btn-primary' %>
+	<%= f.submit 'Submit', :class => ' btn btn-primary' %>
 	
-	<%= f.submit 'Save', :class => 'form-control btn btn-primary' %>
+	<%= f.submit 'Draft', :class => 'btn btn-primary' %>
+	
+		 <%= link_to  user_path do %>
+	 <input type="button" class="btn btn-outline" value="Cancel"/>
+	 <% end %>
 </div>
 
  

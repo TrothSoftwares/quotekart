@@ -62,7 +62,7 @@ $(document).ready(function() {
 	
 	/* FOR TABLE LISTING QUOTE (DATATABLES) */
 $('#quotes_table').DataTable({
-		"pageLength": 20, 
+		"pageLength": 2, 
 		
 });
 /*---------  END OF TABLE LISTING QUOTES -----------*/

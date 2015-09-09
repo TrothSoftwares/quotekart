@@ -36,7 +36,7 @@ class QuotesController < ApplicationController
        sent_to_dealers.each do|sent_to_dealer| 
          @quote_items= @quote.quote_items
           @quote_items.each do |qitem|
-            @quote_bid = qitem.quote_bids.create(dealer_id: sent_to_dealer.id)
+            @quote_bid = qitem.quote_bids.create(dealer_id: sent_to_dealer.id , status: 'inbox')
           end
       end
       end 
@@ -82,7 +82,6 @@ class QuotesController < ApplicationController
     
     ###### CLIENT UPDATE #########
     if params[:update_type] == "client_update"
-     logger.info "#########"
       @user = current_user
       @quote = @user.quotes.find(params[:id])
       quote_details_form = params["quote"]["details"]
@@ -93,8 +92,7 @@ class QuotesController < ApplicationController
       end
       
     if params[:commit] == "Submit"
-    logger.info "#########submit"
-      sent_quote   
+       sent_quote   
     end
     end 
     ###### -------------- #########
@@ -120,8 +118,22 @@ class QuotesController < ApplicationController
     
     
         ########   DEALER UPDATE   #####
-    if params[:dealer_update]
-      @quote.update_attribute(:status,  'dealersubmited')
+    if params[:update_type] == "dealer_update"
+       
+       if params[:commit] == "Submit"
+         @quote.quote_bids.where(dealer: current_dealer).update_all(:status => 'submitted')   
+       end
+       
+       if params[:commit] == "Save"
+         @quote.quote_bids.where(dealer: current_dealer).update_all(:status => 'drafted')   
+       end
+          
+       
+       
+       
+       
+      
+      
       
       
       
@@ -157,19 +169,31 @@ class QuotesController < ApplicationController
   def destroy
     @quote.destroy
     respond_to do |format|
-      format.html { redirect_to quotes_url, notice: 'Quote was successfully destroyed.' }
+      format.html { redirect_to dashboardurl, notice: 'Quote was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    
+ def dashboardurl
+    if current_user.present?
+      user_path
+    elsif current_dealer.present?
+      dealer_path
+    elsif current_admin.present?
+      admin_path
+    end
+  end
+
+
     def set_quote
       @quote = Quote.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quote_params
-      params.require(:quote).permit(:name , :quote_bid   ,  :quote_bids_attributes=>[:amount,:name, :bid_amount , :id] ,  :details=>[] )
+      params.require(:quote).permit(:name , :quote_bid   ,  :quote_bids_attributes=>[:amount,:name, :bid_amount , :id , :unit_amount, :remarks] ,  :details=>[] )
     end
 end
