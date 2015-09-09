@@ -1,0 +1,13 @@
+
+	<% if current_user.present? %> 
+    <%= render 'quotes/user_quotes' %>
+     <% end %>
+     
+     <% if current_dealer.present? %> 
+    <%= render 'quotes/dealer_quotes' %>
+     <% end %>
+     
+     <% if current_admin.present? %> 
+    <%= render 'quotes/admin_quotes' %>
+     <% end %>
+     

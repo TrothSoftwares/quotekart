@@ -1,0 +1,59 @@
+
+<%= form_for(@quote) do |f| %>
+<% if @quote.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
+	<ul>
+		<% @quote.errors.full_messages.each do |message| %>
+		<li>
+			<%= message %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+	<%= f.hidden_field :name %>
+	
+	<input type="hidden" name="update_type" value="dealer_update" >
+	
+<div>
+	<label> Quote name</label>
+	<label><%= @quote.name %></label>
+	<div class="table-responsive">
+		<table class="table table-striped table-hover table-responsive">
+		
+		
+		<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Gauge</th><th>Quantity</th><th>Unit</th><th>Remarks</th><th>Unit Price</th><th>Line Total</th><th>Remarks</th>
+			<% @quote.quote_items.each do |quote_item| %>
+			<tr>
+					<%  quote_item.quote_details.each do |label, data|%>
+					<td><%= data %></td>
+					<% end %>
+					<%= f.fields_for :quote_bids , @quote.quote_bids.where(dealer: current_dealer , quote_item: quote_item) do |quote_bid_fields| %>
+   					   <td><%= quote_bid_fields.number_field :unit_amount %></td>
+   					   <td><%= quote_bid_fields.number_field :bid_amount %></td>
+   					   <td><%= quote_bid_fields.text_field :remarks%></td>
+ 					 <% end %>
+					
+			 			
+ 			</tr>
+			<% end %>
+		</table>
+	</div>
+ 
+</div>
+
+
+<div class="form-group">
+<br><br>
+		
+	<%= f.submit 'Submit', :class => ' btn btn-success' %>
+	
+	<%= f.submit 'Draft', :class => ' btn btn-primary' %>
+	
+	 <%= link_to  @quote do %>
+	 <input type="button" class="btn btn-outline" value="Cancel"/>
+	 <% end %>
+</div>
+<% end %>

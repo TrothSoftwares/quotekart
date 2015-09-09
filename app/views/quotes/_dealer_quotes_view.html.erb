@@ -1,0 +1,50 @@
+<div class="row">
+	<h3><%= @quote.name %></h3>
+ </div>
+ 
+<div>
+		<div class="table-responsive ">
+	
+	<table class="table table-striped table-bordered table-hover  table-condensed">
+	<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Gauge</th><th>Quantity</th><th>Unit</th><th>Remarks</th>
+	
+			<% @quote.quote_items.each do |quote_item| %>
+				<tr>
+					<%  quote_item.quote_details.each do |label, data|%>
+					<td><%= data %></td>
+					<% end %>
+				</tr>
+			<% end %>
+ 	 </table>
+ 
+	</div>
+	
+	
+	<%= link_to    edit_quote_path do %>
+	<% if getquotebidstatus == 'drafted' %>
+	<button class="btn btn-primary" >Continue Editing</button>
+	<% elsif getquotebidstatus == 'inbox' %>
+	<button class="btn btn-primary" >Apply For  Quote</button>
+	<% end %>
+	<% end %>
+	
+	 
+	<% if getquotebidstatus == 'drafted' %>
+	<%= link_to    quotes_path(:type=>'drafted') do %>
+	<button class="btn btn-primary" >Back</button>
+	<% end %>
+	<% end %>
+	
+	<% if getquotebidstatus == 'inbox' %>
+	<%= link_to    quotes_path(:type=>'inbox') do %>
+	<button class="btn btn-primary" >Back</button>
+	<% end %>
+	<% end %>
+	
+	<% if getquotebidstatus == 'submitted' %>
+	<%= link_to    quotes_path(:type=>'submitted') do %>
+	<button class="btn btn-primary" >Back</button>
+	<% end %>
+	<% end %>
+	
+</div>

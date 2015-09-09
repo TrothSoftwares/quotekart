@@ -1,0 +1,42 @@
+<div class="row">
+	<h3><%= @quote.name %></h3>
+ </div>
+<ol class="progtrckr" data-progtrckr-steps="5">
+<% stage = process_stage %>
+    <li class="progtrckr-<%= stage[0] %>">Created</li>
+    <li class="progtrckr-<%= stage[1] %>">Submitted</li>
+    <li class="progtrckr-<%= stage[2] %>">Recieving Response</li>
+    <li class="progtrckr-<%= stage[3] %>">Release</li>
+    <li class="progtrckr-<%= stage[4] %>">Delivered</li>
+</ol>
+<br><br>
+<div>
+		<div class="table-responsive">
+	
+	<table class="table table-striped table-bordered  table-hover table-condensed">
+	<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Gauge</th><th>Quantity</th><th>Unit</th><th>Remarks</th>
+	
+			<% @quote.quote_items.each do |quote_item| %>
+				<tr>
+					<%  quote_item.quote_details.each do |label, data|%>
+					<td><%= data %></td>
+					<% end %>
+				</tr>
+			<% end %>
+ 	 </table>
+ 
+	</div>
+	
+	<% if @quote.status == 'created' %>
+	<%= link_to    edit_quote_path do %>
+	<button class="btn btn-primary" >Continue Editing</button>
+	<% end %>
+	<% else %>
+	<%= link_to    quotes_path(:type => 'open') do %>
+	<button class="btn btn-primary" >Back</button>
+	<%= link_to    quotes_path(:type => 'open') do %>
+	<button class="btn btn-primary" >Release Quote</button>
+	<% end %>
+	<% end %>
+	<% end %>
+	</div>

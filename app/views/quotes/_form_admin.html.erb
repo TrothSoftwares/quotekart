@@ -1,0 +1,34 @@
+<%= form_for(@quote) do |f| %>
+<% if @quote.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
+	<ul>
+		<% @quote.errors.full_messages.each do |message| %>
+		<li>
+			<%= message %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+ 
+	<%= f.hidden_field :name %>
+	
+ 
+									<input type="hidden" name="admin_update" value="true">
+
+										<select id="sent_quotes" name="sent_to_dealers[]" multiple="multiple">
+                                            <% @dealers.each do |dealer| %>
+                                                <option value="<%= dealer.id %>"><%= dealer.email %> <b>Shop Type: 
+                                                <% dealer.shop_type.each do |shop_type| %>
+                                                <%= shop_type %>
+                                                <% end %>
+                                                </b></option>
+                                                <% end %>
+                                        </select>
+
+
+<div class="actions">
+	<%= f.submit %>
+</div>
+<% end %>
