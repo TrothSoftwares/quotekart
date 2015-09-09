@@ -16,7 +16,7 @@
 <div class="row ">
 
 	<div class="form-group col-md-8">
-		<%= f.label :name , "Quote Title" %>
+		<big><%= f.label :name , "Quote Title" %></big>
 		<%= f.text_field :name , class:"form-control"%>
 	</div>
 	
@@ -34,73 +34,19 @@ end
 %>
 <input type="hidden" name="quote_category" value="<%= quote_category %>" >
 <input type="hidden" name="update_type" value="<%= update_type %>" >
-<% if !@quote.persisted? %>
+<% if !@quote.persisted? %>  <!-- if new quote -->
 
-<!-- if new record -->
-	<div class="table-responsive">
+<% if ['plumbing','sanitary','electrical'].include? quote_category  %>
+ <%= render 'quotes/plumbsanelect_form' %>
+<% end %>
+
+<% if ['tiles','marble'].include? quote_category  %>
+ <%= render 'quotes/plumbsanelect_form' %>
+<% end %>
 	
-	<table class="table table-striped    table-condensed controls">
-	<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Gauge</th><th>Quantity</th><th>Unit</th><th>Remarks</th>
-		<tr class="entry">
-		<td><div class="form-group ">
-			<input class="form-control" name="quote[details][1][sno]" type="text" placeholder="No." />
-		</div>
-		</td>
-		
-		<td>
-		<div class="form-group">
-			<input class="form-control" name="quote[details][1][name]" type="text" placeholder="Item Name" />
-		</div>
-		</td>
-		<td>
-		<div class="form-group">
-			<input class="form-control" name="quote[details][1][description_size]" type="text" placeholder="Size" />
-		</div>
-		</td>
-		<td>
-		<div class="form-group">
-			<input class="form-control" name="quote[details][1][description_unit]" type="text" placeholder="Unit" />
-		</div>
-		</td>
-		<td>
-		<div class="form-group">
-			<input class="form-control" name="quote[details][1][brand]" type="text" placeholder="Brand" />
-		</div>
-		</td>
-		<td>
-		<div class="form-group">
-			<input class="form-control" name="quote[details][1][gauge]" type="text" placeholder="Gauge" />
-		</div>
-		</td>
-		<td>
-		<div class="form-group">
-			<input class="form-control" name="quote[details][1][quantity]" type="text" placeholder="Quantity" />
-		</div>
-		</td>
-		<td>
-		<div class="form-group">
-			<input class="form-control" name="quote[details][1][quantity_unit]" type="text" placeholder="Unit" />
-		</div>
-		</td>
-		<td>
-		<div class="form-group">
-			<input class="form-control" name="quote[details][1][remarks]" type="text" placeholder="Remarks" />
-		</div>
-		</td>
-		<td>
-		<span class="input-group-btn">
-			<button class="btn btn-success btn-add" type="button">
-				<span class="glyphicon glyphicon-plus"></span>
-			</button>
-			</span>
-			</td>
-			</tr>
-			</table>
-	</div>
- 
  
 
-<%  else %>
+<%  else %>  <!-- edit quote -->
 	<div class="table-responsive">
 	
 	<table class="table table-striped    table-condensed controls">

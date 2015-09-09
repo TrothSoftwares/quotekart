@@ -38,6 +38,8 @@ def getquotebidstatus
 @quote.quote_bids.first.status
 end
 
+ 
+
 
 
 
