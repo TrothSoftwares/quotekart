@@ -14,6 +14,7 @@ gem 'devise'
 gem "font-awesome-rails"
 gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'bootstrap-multiselect-rails', '~> 0.9.9'
+gem 'premailer-rails'
 
 
 group :development, :test do
