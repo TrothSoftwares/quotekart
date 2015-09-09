@@ -14,7 +14,12 @@
 		<div class="table-responsive">
 	
 	<table class="table table-striped table-bordered  table-hover table-condensed">
+	
+	<% if ['plubming', 'sanitary', 'electrical'].include?@quote.category %> 
 	<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Gauge</th><th>Quantity</th><th>Unit</th><th>Remarks</th>
+	<% elsif ['tiles', 'marble', 'granite'].include?@quote.category %>
+	<th>S.No</th> <th>Company</th><th>Item Description</th><th>Size</th><th>Quantity</th><th>Unit</th><th>Remarks</th>
+	<% end %>
 	
 			<% @quote.quote_items.each do |quote_item| %>
 				<tr>
@@ -29,13 +34,24 @@
 	
 	<% if @quote.status == 'created' %>
 	<%= link_to    edit_quote_path do %>
-	<button class="btn btn-primary" >Continue Editing</button>
+	<button class="btn btn-primary" >
+		Continue Editing
+	</button>
+		<%= link_to    quotes_path(:type => 'drafted') do %>
+	<button class="btn btn-primary" >
+		Back
+	</button>
+	<% end %>
 	<% end %>
 	<% else %>
 	<%= link_to    quotes_path(:type => 'open') do %>
-	<button class="btn btn-primary" >Back</button>
+	<button class="btn btn-primary" >
+		Back
+	</button>
 	<%= link_to    quotes_path(:type => 'open') do %>
-	<button class="btn btn-primary" >Release Quote</button>
+	<button class="btn btn-primary" >
+		Release Quote
+	</button>
 	<% end %>
 	<% end %>
 	<% end %>

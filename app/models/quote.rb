@@ -1,7 +1,7 @@
 class Quote < ActiveRecord::Base
 #validates :status, inclusion: { in: %w(created open clientsubmited adminsent dealerdrafted dealersubmited released) }
 
-
+validates :name , presence: true
  
 
   has_many :quote_items  , dependent: :destroy

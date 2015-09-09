@@ -21,10 +21,13 @@
 	<label> Quote name</label>
 	<label><%= @quote.name %></label>
 	<div class="table-responsive">
-		<table class="table table-striped table-hover table-responsive">
+		<table class="table table-striped table-bordered table-hover table-responsive">
 		
-		
-		<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Gauge</th><th>Quantity</th><th>Unit</th><th>Remarks</th><th>Unit Price</th><th>Line Total</th><th>Remarks</th>
+		<% if ['plubming', 'sanitary', 'electrical'].include?@quote.category %> 
+	<th>S.No</th> <th>Item</th><th>Size</th><th>Unit</th><th>Brand</th><th>Gauge</th><th>Quantity</th><th>Unit</th><th>Remarks</th><th>Unit Price</th><th>Line Total</th><th>Remarks</th>
+	<% elsif ['tiles', 'marble', 'granite'].include?@quote.category %>
+	<th>S.No</th> <th>Company</th><th>Item Description</th><th>Size</th><th>Quantity</th><th>Unit</th><th>Remarks</th><th>Unit Price</th><th>Line Total</th><th>Remarks</th>
+	<% end %>
 			<% @quote.quote_items.each do |quote_item| %>
 			<tr>
 					<%  quote_item.quote_details.each do |label, data|%>

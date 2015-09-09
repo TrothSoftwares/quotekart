@@ -38,7 +38,10 @@ class QuotesController < ApplicationController
           @quote_items.each do |qitem|
             @quote_bid = qitem.quote_bids.create(dealer_id: sent_to_dealer.id , status: 'inbox')
           end
-      end
+          # sent emails 
+          logger.info "##################### Preparingto send mail"
+          QuoteMailer.send_dealer(sent_to_dealer, @quote).deliver_later
+        end
       end 
  end
   
@@ -49,6 +52,8 @@ class QuotesController < ApplicationController
     @user = current_user
     @quote = @user.quotes.build(quote_params)
     @quote.status = "created"
+    @quote.category = params["quote_category"]||"default"
+    
     quote_details_form = params["quote"]["details"]
     quote_details_form.each do |item,value|
       item_category = params["quote_category"]||"default"
@@ -124,7 +129,7 @@ class QuotesController < ApplicationController
          @quote.quote_bids.where(dealer: current_dealer).update_all(:status => 'submitted')   
        end
        
-       if params[:commit] == "Save"
+       if params[:commit] == "Draft"
          @quote.quote_bids.where(dealer: current_dealer).update_all(:status => 'drafted')   
        end
           
