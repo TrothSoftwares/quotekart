@@ -46,6 +46,10 @@ end
 <% if ['tiles','marble','granite'].include? quote_category  %>
  <%= render 'quotes/tilemarble_form' %>
 <% end %>
+
+<% if ['wood'].include? quote_category  %>
+ <%= render 'quotes/wooden_form' %>
+<% end %>
 	
  
 

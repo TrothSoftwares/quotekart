@@ -153,5 +153,26 @@ width:50px;
     
     
     /* FOR BOOTSTRAP TABLE AUTO WIDTH */
-   table.controls input {max-width:120px !important;}
+   table.controls input {max-width:168px !important;}
  
+
+
+/* user logout dropdown */
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
