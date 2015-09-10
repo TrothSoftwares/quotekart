@@ -1,0 +1,85 @@
+
+
+
+
+
+<%= render 'quotes/dashboard_header_user' %>
+
+
+
+
+
+<%= form_for(@quote) do |f| %>
+
+<% if @quote.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
+	<ul>
+		<% @quote.errors.full_messages.each do |message| %>
+		<li>
+			<%= message %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<br>
+<div class="row ">
+
+	<div class="form-group col-md-8">
+		<big><%= f.label :name , "Quote Title" %></big>
+		<%= f.text_field :name , class:"form-control"%>
+	</div>
+	
+</div>
+<br>
+
+<% quote_category = params[:category] || @quote.quote_items.first.category
+if current_user.present?
+update_type = "client_update"
+elsif current_dealer.present?
+update_type = "dealer_update"
+elsif current_admin.present?
+update_type = "admin_update"
+end
+%>
+<input type="hidden" name="quote_category" value="<%= quote_category %>" >
+<input type="hidden" name="update_type" value="<%= update_type %>" >
+
+
+
+
+
+<% if ['plumbing','sanitary','electrical'].include? quote_category  %>
+ <%= render 'quotes/plumbsanelect_form' %>
+<% end %>
+
+<% if ['tiles','marble','granite'].include? quote_category  %>
+ <%= render 'quotes/tilemarble_form' %>
+<% end %>
+
+<% if ['wood'].include? quote_category  %>
+ <%= render 'quotes/wooden_form' %>
+<% end %>
+	
+ 
+
+
+
+ 
+<div class="form-group">
+<br><br>
+		
+	<%= f.submit 'Submit', :class => ' btn btn-primary' %>
+	
+	<%= f.submit 'Draft', :class => 'btn btn-primary' %>
+	
+		 <%= link_to  user_path do %>
+	 <input type="button" class="btn btn-outline" value="Cancel"/>
+	 <% end %>
+</div>
+
+ 
+
+<% end %>

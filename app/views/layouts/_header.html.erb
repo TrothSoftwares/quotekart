@@ -1,0 +1,53 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+   
+    <div class="navbar-header">
+      
+      <a class="navbar-brand" href="<%= root_path %>">QuoteKart</a>
+    </div>
+ 
+   
+   
+
+
+    <div class="  navbar-collapse yesb" id="bs-example-navbar-collapse-1">
+    
+     
+     
+    
+    <% if current_user.present? %> 
+    <%= render 'layouts/header_users' %>
+     <% end %>
+     
+     <% if current_dealer.present? %> 
+    <%= render 'layouts/header_dealers' %>
+     <% end %>
+     
+     <% if current_admin.present? %> 
+    <%= render 'layouts/header_admin' %>
+     <% end %>
+     
+     <% if notice %>
+<div id="notice text-center ">
+	<div class="alert alert-danger alert-dismissible text-center col-md-4" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<strong style="text-transform: uppercase"> &emsp;</strong><%= notice %>
+	</div>
+</div>
+<% end %>
+      
+    
+    
+    
+
+
+    </div>
+  </div>
+</nav>
+
+
+
+
+

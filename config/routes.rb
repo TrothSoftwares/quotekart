@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
 
-  devise_for :dealers
+
+  resources :quotes
+  root 'quote#home'
+  get 'dashboard/index'
+  
+  get 'user' => 'user#index'
+  get 'dealer' => 'dealer#index'
+  get 'admin' => 'admin#index'
+  
+  devise_for :dealers , controllers: { registrations: "dealers/registrations" }
   devise_for :admins
-  devise_for :users
+  devise_for :users ,  controllers: { registrations: "users/registrations" }
    
   
  
