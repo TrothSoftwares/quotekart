@@ -2,16 +2,13 @@
   <div class="container-fluid">
    
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar">asssss</span>
-        <span class="icon-bar">ddddd</span>
-        <span class="icon-bar">ccccc</span>
-      </button>
-      <a class="navbar-brand" href="#">QuoteKart</a>
+      
+      <a class="navbar-brand" href="<%= root_path %>">QuoteKart</a>
     </div>
  
-   <p id="notice"><%= notice %></p>
+   
+   
+
 
     <div class="  navbar-collapse yesb" id="bs-example-navbar-collapse-1">
     
@@ -30,7 +27,16 @@
     <%= render 'layouts/header_admin' %>
      <% end %>
      
-     
+     <% if notice %>
+<div id="notice text-center ">
+	<div class="alert alert-danger alert-dismissible text-center col-md-4" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<strong style="text-transform: uppercase"> &emsp;</strong><%= notice %>
+	</div>
+</div>
+<% end %>
       
     
     
@@ -40,3 +46,8 @@
     </div>
   </div>
 </nav>
+
+
+
+
+

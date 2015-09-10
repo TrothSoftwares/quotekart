@@ -26,17 +26,46 @@ class QuotesController < ApplicationController
 
   # POST /quotes
   # POST /quotes.json
+  
+ def sent_quote
+       @quote.update_attribute(:status,  'admin_sent')
+       @quote.update_attribute(:submitted_at, DateTime.now)
+      item_category = params[:quote_category]
+      sent_to_dealers = Dealer.all.select { |m| m.shop_type.include? item_category  }
+      if sent_to_dealers.present?
+       sent_to_dealers.each do|sent_to_dealer| 
+         @quote_items= @quote.quote_items
+          @quote_items.each do |qitem|
+            @quote_bid = qitem.quote_bids.create(dealer_id: sent_to_dealer.id , status: 'inbox')
+          end
+          # sent emails 
+          logger.info "##################### Preparingto send mail"
+          QuoteMailer.send_dealer(sent_to_dealer, @quote).deliver_later
+        end
+      end 
+ end
+  
+  
+  
   def create
   
     @user = current_user
     @quote = @user.quotes.build(quote_params)
-    @quote.status = "client_submitted"
+    @quote.status = "created"
+    @quote.category = params["quote_category"]||"default"
+    
     quote_details_form = params["quote"]["details"]
     quote_details_form.each do |item,value|
-      item_category = value["category"]
+      item_category = params["quote_category"]||"default"
       @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
     end
 
+
+    if params[:commit] == "Submit"
+      sent_quote   
+    end
+    
+    
     respond_to do |format|
       if @quote.save  
         format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
@@ -57,19 +86,25 @@ class QuotesController < ApplicationController
     @dealers = Dealer.all
     
     ###### CLIENT UPDATE #########
-    if params[:client_update].present?
+    if params[:update_type] == "client_update"
       @user = current_user
       @quote = @user.quotes.find(params[:id])
       quote_details_form = params["quote"]["details"]
       @quote.quote_items.destroy_all
       quote_details_form.each do |item,value|
-        item_category = value["category"]
+        item_category = params["quote_category"]||"default"
         @quote_item = @quote.quote_items.build(category: item_category , quote_details: value.to_a)
       end
+      
+    if params[:commit] == "Submit"
+       sent_quote   
+    end
     end 
     ###### -------------- #########
     
     
+     
+     
      
     ########   ADMIN UPDATE   #####
     if params[:admin_update]
@@ -88,8 +123,24 @@ class QuotesController < ApplicationController
     
     
         ########   DEALER UPDATE   #####
-    if params[:dealer_update]
-      @quote.update_attribute(:status,  'dealersubmited')
+    if params[:update_type] == "dealer_update"
+       
+       if params[:commit] == "Submit"
+         @quote.quote_bids.where(dealer: current_dealer).update_all(:status => 'submitted')   
+       end
+       
+       if params[:commit] == "Draft"
+         @quote.quote_bids.where(dealer: current_dealer).update_all(:status => 'drafted')   
+       end
+          
+       
+       
+       
+       
+      
+      
+      
+      
       
       '''
       sent_to_dealers = params[:sent_to_dealers]
@@ -123,19 +174,31 @@ class QuotesController < ApplicationController
   def destroy
     @quote.destroy
     respond_to do |format|
-      format.html { redirect_to quotes_url, notice: 'Quote was successfully destroyed.' }
+      format.html { redirect_to dashboardurl, notice: 'Quote was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    
+ def dashboardurl
+    if current_user.present?
+      user_path
+    elsif current_dealer.present?
+      dealer_path
+    elsif current_admin.present?
+      admin_path
+    end
+  end
+
+
     def set_quote
       @quote = Quote.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quote_params
-      params.require(:quote).permit(:name , :quote_bids , :quote_bids_attributes=>[:amount,:name] , :details=>[], )
+      params.require(:quote).permit(:name , :quote_bid   ,  :quote_bids_attributes=>[:amount,:name, :bid_amount , :id , :unit_amount, :remarks] ,  :details=>[] )
     end
 end

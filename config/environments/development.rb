@@ -40,4 +40,18 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
+  config.action_mailer.delivery_method = :smtp
+config.action_mailer.raise_delivery_errors = true
+
+ActionMailer::Base.smtp_settings = {
+  :address        => 'smtp.gmail.com',
+  :domain         => 'mail.google.com',
+  :port           => 587,
+  :user_name      => 'talha@object90.com',
+  :password       => '9947183255p',
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
+  
 end
