@@ -1,4 +1,16 @@
-<%= form_for(@quote , :html => {:class => "form-inline"}) do |f| %>
+
+
+
+
+
+<%= render 'quotes/dashboard_header_user' %>
+
+
+
+
+
+<%= form_for(@quote) do |f| %>
+
 <% if @quote.errors.any? %>
 <div id="error_explanation">
 	<h2><%= pluralize(@quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
