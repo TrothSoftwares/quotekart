@@ -1,8 +1,10 @@
 	<% if current_user.present? %> 
+	<%= render 'quotes/dashboard_header_user' %>
     <%= render 'form_user' %>
      <% end %>
      
      <% if current_dealer.present? %> 
+     <%= render 'quotes/dashboard_header_dealer' %>
     <%= render 'form_dealer' %>
      <% end %>
      

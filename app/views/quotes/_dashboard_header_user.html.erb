@@ -1,86 +1,138 @@
-<div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    
-                                    <div>New Quotes!</div>
-                                </div>
-                            </div>
-                        </div>
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New</button>       
-                    </div>
-                </div>
+<!-- FOR CATEGORIES MODAL   ---->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Caterories</h4>
+      </div>
+      <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6" >
+        	<%= link_to   new_quote_path(:category => "tiles") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-building fa-2x">	Tiles</i>  
+				</button>
+        	<% end %><br><br>
+        	<%= link_to   new_quote_path(:category => "granite") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-building-o fa-2x">		Granite</i>  
+				</button>
+        	<% end %><br><br>
+        	<%= link_to   new_quote_path(:category => "marble") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-stop fa-2x">	Marble</i>  
+				</button>
+        	<% end %><br><br>
+        		<%= link_to   new_quote_path(:category => "wood") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-stop fa-2x">	Wooden Flooring</i>  
+				</button>
+        	<% end %><br><br>
+     
+       
+        	
+        </div>
+        
+        <div class="col-md-6" >
+        	<%= link_to   new_quote_path(:category => "sanitary") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-bars fa-2x">	Sanitary</i>  
+				</button>
+        	<% end %><br><br>
+        	<%= link_to   new_quote_path(:category => "electrical") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-plug fa-2x">	Electrical</i>  
+				</button>
+        	<% end %><br><br>
+         	   		<%= link_to   new_quote_path(:category => "plumbing") do  %>
+        		<button class="btn btn-primary" type="button">
+ 				 <i class="fa fa-bitbucket fa-2x">	 Plumbing</i>  
+				</button>
+        	<% end %>
+        
+       
+       
+        </div>
+        </div>
+ 
+      </div>
+      <div class="modal-footer">
+     
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--- END OF CATEGORIES MODAL ----->
+<div class="row text-center">
+        
+     <div class="col-lg-3 col-md-6">
+		<button class="btn btn-default" data-toggle="modal" data-target="#myModal">
+			<div class="col-md-4">
+				<%= image_tag("new_small.gif", :alt => "Released Quote", :height=>52 ,  :title => "Released Quote") %>
+			</div>
+			<div class="caption post-content col-md-8">
+				<label>Add New Quote</label>
+				<p>
+					12 Quotes
+				</p>
+			</div>
+		</button>
+	</div>
                 
                 
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Open Quotes!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <%= link_to quotes_path(:type => "open") do %>
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        <% end %>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-warning">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                   <%=  image_tag("quote_released.jpg", :alt => "Released Quote", :width => 100, :height => 100, :title => "Released Quote") %>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                    <div>Released Quotes!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <%= link_to quotes_path(:type => "released") do %>
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        <% end %>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                    <div>Drafted Quotes!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <%= link_to quotes_path(:type => "drafted") do %>
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        <% end %>
-                    </div>
-                </div>
+<div class="col-lg-3 col-md-6 ">
+		<%= link_to quotes_path(:type => "open") do %>
+		<button class="btn btn-default">
+		<div class="col-md-4">
+			<%= image_tag("open_small.gif", :alt => "Released Quote",   :height=>52 ,:title => "Released Quote") %>
+		</div>
+		<div class="caption post-content col-md-8">
+			<label>Open Quotes</label>
+			<p>
+				12 Quotes
+			</p>
+		</div>
+		</button>
+		<% end %>
+	</div>
+	
+	
+	
+	<div class="col-lg-3 col-md-6 ">
+		<%= link_to quotes_path(:type => "released") do %>
+		<button class="btn btn-default">
+		<div class="col-md-4">
+			<%= image_tag("released_small.gif", :alt => "Released Quote",  :height=>52 , :title => "Released Quote") %>
+		</div>
+		<div class="caption post-content col-md-8">
+			<label>Released Quotes</label>
+			<p>
+				12 Quotes
+			</p>
+		</div>
+		</button>
+		<% end %>
+	</div>
+                
+                
+ 
+ 	<div class="col-lg-3 col-md-6 ">
+		<%= link_to quotes_path(:type => "drafted") do %>
+		<button class="btn btn-default">
+		<div class="col-md-4">
+			<%= image_tag("drafted_small.gif", :alt => "Released Quote",  :height=>52 , :title => "Drafted Quotes") %>
+		</div>
+		<div class="caption post-content col-md-8">
+			<label>Drafted Quotes</label>
+			<p>
+				12 Quotes
+			</p>
+		</div>
+		</button>
+		<% end %>
+	</div>
             </div>

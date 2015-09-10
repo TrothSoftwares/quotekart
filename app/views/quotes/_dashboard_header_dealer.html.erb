@@ -1,0 +1,55 @@
+
+<div class="row text-center">
+                
+<div class="col-lg-3 col-md-6 ">
+		<%= link_to quotes_path(:type => "inbox") do %>
+		<button class="btn btn-default">
+		<div class="col-md-4">
+			<%= image_tag("released_small.gif", :alt => "Inbox",   :height=>52 ,:title => "Inbox") %>
+		</div>
+		<div class="caption post-content col-md-8">
+			<label>Inbox</label>
+			<p>
+				12 Quotes
+			</p>
+		</div>
+		</button>
+		<% end %>
+	</div>
+	
+	
+	<div class="col-lg-3 col-md-6 ">
+		<%= link_to quotes_path(:type => "drafted") do %>
+		<button class="btn btn-default">
+		<div class="col-md-4">
+			<%= image_tag("drafted_small.gif", :alt => "Drafted",   :height=>52 ,:title => "Drafted") %>
+		</div>
+		<div class="caption post-content col-md-8">
+			<label>Drafted Quotes</label>
+			<p>
+				12 Quotes
+			</p>
+		</div>
+		</button>
+		<% end %>
+	</div>
+	
+	
+		<div class="col-lg-3 col-md-6 ">
+		<%= link_to quotes_path(:type => "submitted") do %>
+		<button class="btn btn-default">
+		<div class="col-md-4">
+			<%= image_tag("open_small.gif", :alt => "Submitted",   :height=>52 ,:title => "Submitted") %>
+		</div>
+		<div class="caption post-content col-md-8">
+			<label>Submitted Quotes</label>
+			<p>
+				12 Quotes
+			</p>
+		</div>
+		</button>
+		<% end %>
+	</div>
+	
+ 
+            </div>
