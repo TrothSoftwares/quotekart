@@ -46,23 +46,50 @@
             <tr>
             	<th>Quote ID</th>
                 <th>Title</th>
-                <th>Show</th>
-                <th>Edit</th>
-                <th>Age</th>
+                <th>View</th>
+
                  
             </tr>
         </thead>
         <tbody>
-        <% open_quotes = Quote.where(status: 'released', user_id: current_user.id) %>
-            <% open_quotes.each do |quote| %>
+        
+        <%
+        
+        
+        @user_sent_quotes= Quote.where(status: ['released'], user_id: current_user.id)
+        
+        @user_sent_quotes.each do |user_sent_quotes|
+        
+    
+         quote_bids = user_sent_quotes.quote_bids.where(:status => 'submitted')
+         
+         
+                  #quote_bids = QuoteBid.where( status: 'submitted')
+        quotes = Array.new
+    	quote_bids.each do |quote_bid|
+	    	quotes << quote_bid.quote_item.quote
+        end
+         %>
+
+            <% quotes.uniq.each do |quote| %>
       <tr>
       	<td><%= quote.id %></td>
-        <td><%= quote.name %></td>
-        <td><%= link_to 'Show', quote %></td>
-        <td><%= link_to 'Edit', edit_quote_path(quote) %></td>
-        <td><%= link_to 'Destroy', quote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to quote.name, quote %></td>
+          <td><%= if quote.submitted_at.present?
+        deadline = quote.submitted_at + 15.days
+        distance_of_time_in_words(Time.now, deadline)<< " left"  
+        end
+         %> </td>
       </tr>
     <% end %>
+    <% end %>
+        
+          
+        
+        
+ 
+          
+	 
         </tbody>
     </table>
     

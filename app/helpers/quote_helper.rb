@@ -38,7 +38,12 @@ def getquotebidstatus
 @quote.quote_bids.first.status
 end
 
- 
+
+def quotescount(stat)
+@status = stat
+current_user.quotes.where(status: @status).count
+end
+
 
 
 

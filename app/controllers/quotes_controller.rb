@@ -39,10 +39,18 @@ class QuotesController < ApplicationController
             @quote_bid = qitem.quote_bids.create(dealer_id: sent_to_dealer.id , status: 'inbox')
           end
           # sent emails 
-          logger.info "##################### Preparingto send mail"
           QuoteMailer.send_dealer(sent_to_dealer, @quote).deliver_later
         end
       end 
+ end
+ 
+ 
+ 
+ def releasequote
+ 
+ @quote = Quote.find(params[:quote])
+ @quote.update_attribute(:status,  'released')
+ redirect_to @quote
  end
   
   

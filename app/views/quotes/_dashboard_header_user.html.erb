@@ -25,13 +25,20 @@
         		<button class="btn btn-primary" type="button">
  				 <i class="fa fa-stop fa-2x">	Marble</i>  
 				</button>
-        	<% end %><br><br>
+        	<% end %>
+        	
+<%
+=begin
+%>
+        	<br><br>
         		<%= link_to   new_quote_path(:category => "wood") do  %>
         		<button class="btn btn-primary" type="button">
  				 <i class="fa fa-stop fa-2x">	Wooden Flooring</i>  
 				</button>
         	<% end %><br><br>
-     
+<%
+=end
+%>
        
         	
         </div>
@@ -76,9 +83,6 @@
 			</div>
 			<div class="caption post-content col-md-8">
 				<label>Add New Quote</label>
-				<p>
-					12 Quotes
-				</p>
 			</div>
 		</button>
 	</div>
@@ -88,12 +92,12 @@
 		<%= link_to quotes_path(:type => "open") do %>
 		<button class="btn btn-default">
 		<div class="col-md-4">
-			<%= image_tag("open_small.gif", :alt => "Released Quote",   :height=>52 ,:title => "Released Quote") %>
+			<%= image_tag("open_small.gif", :alt => "Open Quote",   :height=>52 ,:title => "Released Quote") %>
 		</div>
 		<div class="caption post-content col-md-8">
 			<label>Open Quotes</label>
 			<p>
-				12 Quotes
+				 <%= quotescount('admin_sent') %> Quotes
 			</p>
 		</div>
 		</button>
@@ -111,7 +115,7 @@
 		<div class="caption post-content col-md-8">
 			<label>Released Quotes</label>
 			<p>
-				12 Quotes
+				<%= quotescount('released') %> Quotes
 			</p>
 		</div>
 		</button>
@@ -129,7 +133,7 @@
 		<div class="caption post-content col-md-8">
 			<label>Drafted Quotes</label>
 			<p>
-				12 Quotes
+				<%= quotescount('created') %> Quotes
 			</p>
 		</div>
 		</button>

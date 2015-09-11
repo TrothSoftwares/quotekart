@@ -16,9 +16,11 @@
 
 <br>
 
+<% if @quote.persisted? %>  <!-- if new quote -->
 <div class="page-header">
   <h3>Edit Quote  - <small>User Dashboard</small></h3>
 </div>
+<% end %>
 <div class="row ">
 
 	<div class="form-group col-md-8">
